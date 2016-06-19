@@ -1,0 +1,61 @@
+h1{
+    position: relative;
+    left: 67px;
+    color: black;
+}
+div{
+    color:white;
+    background-color: blue;
+    height: 20px;
+    width: 300px;
+    position: relative;
+    left: 25px;
+}
+#main{
+    background-color: DarkOrchid;
+    height: 720px;
+    width: 350px;
+    position: absolute;
+    top: 10px;
+    left: 60px;  
+    border: 5px solid black;
+    border-radius: 25px;
+}
+input[type=submit]{
+    
+    background-color: blue;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: white;
+    padding: 5px 0px;
+    position: relative;
+    left: 7px;
+    
+}
+textarea{
+    background-color: white;
+    border: 3px solid blue;
+    position: relative;
+    left: 25px;
+}
+a{
+    color: blue;
+    position: relative;
+    left: 90px;
+}
+#link{
+    color: blue;
+    position: relative;
+    left: 200px;
+}
+table, th, td, tr{
+    
+    border: 2px solid black;
+    border-collapse: collapse;
+    color:black;
+}
+#title{ 
+    color: red;
+    font-weight: bold;
+}

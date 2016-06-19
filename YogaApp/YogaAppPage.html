@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    
+    <body>
+        
+        <head>
+            <link rel="stylesheet" type="text/css" href="style.css">
+            
+        </head>
+        
+        <div id="main">
+            
+            <div>
+            <script> alert("Welcome to the Yoga quiz "+document.cookie);</script>
+            <button id="startEng" type="button" onclick="quiz(); next();">START QUIZ IN ENGLISH</button><br>
+            <button id="startSan" type="button" onclick="quizSanskrit(); nextSanskrit();">START QUIZ IN SANSKRIT</button>
+            </div>
+            
+        </div>
+        
+    </body>
+    
+</html>
+
+<script>
+    
+
+   
+    var text = '{"pictures":[{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Half-Moon-Pose.jpg", "name": "Half Moon Pose", "sanskrit": "Ardha Chandrasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/headstand-side.jpg", "name": "Side Headstand", "sanskrit": "Parsva Sirsana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/headstand-splits.jpg", "name": "Extended Leg Headstand Pose", "sanskrit": "Utthita Pada Sirsasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Yoganidrasana.jpg", "name": "Yogic Sleep Pose", "sanskrit":"Yoganidrasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/headstand.jpg", "name": "Headstand", "sanskrit": "Sirsasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Adho-Muka-Kapotasana.jpg", "name": "Downward Facing Pigeon Pose", "sanskrit": "Adho Muka Kapotasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Adho-Mukha-Vrksasana.jpg", "name": "Downward Facing Tree", "sanskrit": "Adho Mukha Vrksasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Vrksasana.jpg", "name": "The Tree Pose", "sanskrit": "Vrksasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Bhuja-Vrischikasana.jpg", "name": "Arm Balance Scorpion", "sanskrit": "Bhuja Vrischikasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Akarna-Dhanurasana.jpg", "name": "Bow To The Ear ", "sanskrit": "Akarna Dhanurasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/lunge.jpg", "name": "Lunge Pose", "sanskrit": "Anjaneyasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Ardha-Jathara-Parivarttanas.jpg", "name": "Half Revolved Belly Pose ", "sanskrit": "Ardha Jathara Parivarttanasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Ardha-Padmasana.jpg", "name": "Half Lotus pose ", "sanskrit": "Ardha Padmasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Astangasana.jpg", "name": "Eight Limb Pose", "sanskrit": "Astangasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/baddhakona.jpg", "name": "Bound Angle Pose", "sanskrit": "Baddha Konasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/Bheka-Parsva-Sarvangasana.jpg", "name": "Half Frog Side Shoulderstand Pose", "sanskrit": "Ardha Bheka Parsva Sarvangasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/boat.jpg", "name": "The Boat Pose ", "sanskrit": "Navasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/camel.jpg", "name": "Camel Pose ", "sanskrit": "Ustrasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/chair.jpg", "name": "Chair Pose", "sanskrit": "Utkatasana"},{"source":"http://www.yogacards.com/yoga-postures-2/yoga-cards/child.jpg", "name": "Child Pose", "sanskrit": "Balasana"}]}';
+    
+    var obj = JSON.parse(text);
+    var index = -1;
+    var answer = 0;
+    var correct = 0;
+    
+    beginQuiz = function()
+    {
+        document.getElementById('main').innerHTML = '<button id="start" type="button" onclick="quiz(); fill();">START QUIZ In ENGLISH</button><br><button id="start" type="button" onclick="quiz(); fill();">START QUIZ IN SANSKRIT</button>';
+    }
+    quiz = function()
+    {
+        document.getElementById('main').innerHTML = '<div id="quiz"> <h1>What is this position?</h1> <img id="image"> <br> <div id="op1"> <p id="name1"></p> <button id="option1" type="button" onclick="checkAnswer(1); next();">SELECT</button> </div> <div id="op2"> <p id="name2"></p> <button id="option2" type="button" onclick=" checkAnswer(2); next();">SELECT</button> </div> <div id="op3"> <p id="name3"></p> <button id="option3" type="button" onclick="checkAnswer(3); next();">SELECT</button> </div> <div id="op4"> <p id="name4"></p> <button id="SELECT" type="button" onclick="checkAnswer(4); next();">SELECT</button> </div> </div><button id="home" type="button" onclick="home();">HOME</button>';
+    }
+    quizSanskrit = function()
+    {
+         document.getElementById('main').innerHTML = '<div id="quiz"> <h1>What is this position?</h1> <img id="image"> <br> <div id="op1"> <p id="name1"></p> <button id="option1" type="button" onclick="checkAnswer(1); nextSanskrit();">SELECT</button> </div> <div id="op2"> <p id="name2"></p> <button id="option2" type="button" onclick=" checkAnswer(2); nextSanskrit();">SELECT</button> </div> <div id="op3"> <p id="name3"></p> <button id="option3" type="button" onclick="checkAnswer(3); nextSanskrit();">SELECT</button> </div> <div id="op4"> <p id="name4"></p> <button id="SELECT" type="button" onclick="checkAnswer(4); nextSanskrit();">SELECT</button> </div> </div><button id="home" type="button" onclick="home();">HOME</button>';
+    }
+    home = function()
+    {
+        document.getElementById('main').innerHTML = '<button id="startEng" type="button" onclick="quiz(); next();">START QUIZ IN ENGLISH</button><br><button id="startSan" type="button" onclick="quizSanskrit(); nextSanskrit();">START QUIZ IN SANSKRIT</button>';
+    }
+    option = function()
+    {       
+        var rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd1 = rd;
+            document.getElementById('name1').innerHTML = obj.pictures[rd].name;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd1 == index)
+        rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd2 = rd;
+            document.getElementById('name2').innerHTML = obj.pictures[rd].name;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd2 == index || rd2 == rd1)
+        rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd3 = rd;
+            document.getElementById('name3').innerHTML = obj.pictures[rd].name;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd3 == index || rd3 == rd1 || rd3 == rd2)
+        rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd4 = rd;
+            document.getElementById('name4').innerHTML = obj.pictures[rd].name;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd4 == index || rd4 == rd1 || rd4 == rd2 || rd4 == rd3)
+            
+        
+        answer = Math.floor((Math.random() * 4) + 1);
+        
+        switch(answer)
+            {
+                case 1:
+                    document.getElementById('name1').innerHTML = "<span>"+obj.pictures[index].name+"</span>";
+                    break;
+                case 2:
+                    document.getElementById('name2').innerHTML = "<span>"+obj.pictures[index].name+"</span>";
+                    break;
+                case 3:
+                    document.getElementById('name3').innerHTML = "<span>"+obj.pictures[index].name+"</span>";
+                    break;
+                case 4:
+                    document.getElementById('name4').innerHTML = "<span>"+obj.pictures[index].name+"</span>";
+                    break;
+            }
+    }
+    optionSanskrit = function()
+    {
+        var rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd1 = rd;
+            document.getElementById('name1').innerHTML = obj.pictures[rd].sanskrit;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd1 == index)
+        rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd2 = rd;
+            document.getElementById('name2').innerHTML = obj.pictures[rd].sanskrit;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd2 == index || rd2 == rd1)
+        rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd3 = rd;
+            document.getElementById('name3').innerHTML = obj.pictures[rd].sanskrit;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd3 == index || rd3 == rd1 || rd3 == rd2)
+        rd = Math.floor((Math.random() * obj.pictures.length));
+        do{
+            var rd4 = rd;
+            document.getElementById('name4').innerHTML = obj.pictures[rd].sanskrit;
+            rd = Math.floor((Math.random() * obj.pictures.length));
+        }while(rd4 == index || rd4 == rd1 || rd4 == rd2 || rd4 == rd3)
+            
+        
+        answer = Math.floor((Math.random() * 4) + 1);
+        
+        switch(answer)
+            {
+                case 1:
+                    document.getElementById('name1').innerHTML = "<span>"+obj.pictures[index].sanskrit+"</span>";
+                    break;
+                case 2:
+                    document.getElementById('name2').innerHTML = "<span>"+obj.pictures[index].sanskrit+"</span>";
+                    break;
+                case 3:
+                    document.getElementById('name3').innerHTML = "<span>"+obj.pictures[index].sanskrit+"</span>";
+                    break;
+                case 4:
+                    document.getElementById('name4').innerHTML = "<span>"+obj.pictures[index].sanskrit+"</span>";
+                    break;
+            }
+    }
+    var questionNum = 0;
+    next = function()
+    {
+        if(questionNum+1 <= 6)
+            {
+                index =  Math.floor((Math.random() * obj.pictures.length));
+                questionNum++;
+                document.getElementById('image').src = obj.pictures[index].source;
+                option();
+            }
+        else
+            {
+                document.getElementById('main').innerHTML = '<div id="finnished"><p>You got '+(correct)+'/'+questionNum+' answers correct</p><button id="restart" type="button" onclick="resetQuiz();">Start again</button><button id="home" type="button" onclick="home();resetData();">HOME</button></div>';
+                alert("Many thanks to yogacards.com for letting us use their images");
+            }
+    }
+    nextSanskrit = function()
+    {
+        if(questionNum+1 <= 6)
+            {
+                index =  Math.floor((Math.random() * obj.pictures.length));
+                questionNum++;
+                document.getElementById('image').src = obj.pictures[index].source;
+                optionSanskrit();
+            }
+        else
+            {
+                document.getElementById('main').innerHTML = '<div id="finnished"><p>You got '+(correct)+'/'+questionNum+' answers correct</p><button id="restart" type="button" onclick="resetSanskrit();">Start again</button><button id="home" type="button" onclick="resetData();home();">HOME</button></div>';
+                alert("Many thanks to yogacards.com for letting us use their images");
+            }
+    }
+    checkAnswer = function(selected)
+    {
+        if(answer == selected && questionNum <= 6)
+            {
+                correct++;
+                alert("Correct!");
+            }
+        else
+            alert("Wrong!");
+    }
+    resetQuiz = function()
+    {
+        correct = 0;
+        index = -1;
+        questionNum = 0;
+        quiz();
+        next();
+    }
+    resetSanskrit = function()
+    {
+        correct = 0;
+        index = -1;
+        questionNum = 0;
+        quizSanskrit();
+        nextSanskrit();
+    }
+    resetData = function()
+    {
+        correct = 0;
+        index = -1;
+        questionNum = 0;
+    }
+</script>

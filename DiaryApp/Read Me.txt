@@ -1,0 +1,1 @@
+This is a small web app, a diary saving its entries on a SQL database using php

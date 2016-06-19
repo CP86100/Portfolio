@@ -1,0 +1,2 @@
+This is a small web app, it is a quiz using yoga cards.
+Login and register system in YogaAppLogin.php.
