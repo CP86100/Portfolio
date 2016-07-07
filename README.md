@@ -1,2 +1,2 @@
 # Portfolio
-This contains some java code and web projects (javascipt, php, html).
+This contains some java code and web programs (javascipt, php, html).
