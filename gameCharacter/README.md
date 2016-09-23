@@ -1,5 +1,5 @@
 # gameCharacter
-Moving game character using Javascript, HTML, CSS and JQuery.
+Moving game character using keyboard arrows, programmed with Javascript, HTML, CSS and JQuery.
 
 
 
