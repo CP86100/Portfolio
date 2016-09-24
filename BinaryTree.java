@@ -3,6 +3,8 @@ public class BinaryTree
 {
 	public static void main(String args[])
 	{
+		
+		//Code to test the Binary tree algorithm
 		Btree tree = new Btree();
 		tree.insert(15);
 		tree.insert(20);
@@ -12,21 +14,11 @@ public class BinaryTree
 		tree.insert(8);
 		tree.insert(12);
 		
-	//  System.out.println(tree.size());
-	//	System.out.println(tree.find(25));
-	//	System.out.println(tree.largest());
-		
 		tree.delete(tree.root());
 		System.out.println(tree.root());
-	//	System.out.println(tree.size());
-	//	System.out.println(tree.find(25));
-		
-	//	System.out.println(tree.root.left.data);
 		
 		tree.delete(tree.smallest());
 		System.out.println(tree.smallest());
-	//	System.out.println(tree.size());
-	//	System.out.println(tree.find(20));
 		
 		tree.delete(tree.largest());
 		System.out.println(tree.largest());
