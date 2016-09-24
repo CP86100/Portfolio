@@ -4,20 +4,25 @@ import java.util.*;
 import java.io.*;
 import java.text.*;
 
-
+/**
+ * This is a program to find the language of a text using character frequencies of a language.
+ * This code is not 100% accurate but it is an interesting and fun project.  
+ *
+ * @author Corentin Pinato (14739811)
+ * @version 1.0
+ */
+ 
 public class FindLanguage 
 {
 	public static void main(String args[])
 	{
 		String input = getInput();
 		
-		input = input.replace("ù", "");
+		input = input.replace("Ã¹", "");
 		
 		int ascii[] = asciiArray(input);
 		char cha[] = inOrder(ascii);
-	//	System.out.println(Arrays.toString(cha));
 		int freq[] = frequency(ascii,cha);
-	//	System.out.println(Arrays.toString(freq));
 		
 		/////////////////////////////////////////////////////////////////////
 		// Get the total amount of characters in the whole text.
