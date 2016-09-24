@@ -1,263 +1,230 @@
 
 public class BinaryTree
 {
-	public static void main(String arsg[])
+	public static void main(String args[])
 	{
-		Tree tree = new Tree();
-
-		tree.insert(18);
-		tree.insert(7);
-		tree.insert(5);
-		tree.insert(12);
-		tree.insert(6);
-		tree.insert(23);
-		tree.insert(50);
-		tree.insert(1);
-		tree.insert(2);
-		tree.insert(100);
+		Btree tree = new Btree();
+		tree.insert(15);
 		tree.insert(20);
-
-	    System.out.println(tree.size());
-
-		tree.delete(18);
-		tree.delete(7);
-    	tree.delete(tree.smallest());
+		tree.insert(25);
+		tree.insert(16);
+		tree.insert(10);
+		tree.insert(8);
+		tree.insert(12);
+		
+	//  System.out.println(tree.size());
+	//	System.out.println(tree.find(25));
+	//	System.out.println(tree.largest());
+		
+		tree.delete(tree.root());
+		System.out.println(tree.root());
+	//	System.out.println(tree.size());
+	//	System.out.println(tree.find(25));
+		
+	//	System.out.println(tree.root.left.data);
+		
+		tree.delete(tree.smallest());
+		System.out.println(tree.smallest());
+	//	System.out.println(tree.size());
+	//	System.out.println(tree.find(20));
+		
 		tree.delete(tree.largest());
-		tree.delete(tree.largest());
-		System.out.println(tree.find(12)+"+"+tree.find(2));
-
-		System.out.println("smallest: "+tree.smallest()+" largest: "+tree.largest()+" root: "+tree.root());
+		System.out.println(tree.largest());
 		System.out.println(tree.size());
-		inOrder(tree);
-		preOrder(tree);
-		postOrder(tree);
-
-
-
 	}
-	public static void postOrder(Tree tree)
-	{
-		post(tree.root);
-	}
-	public static void post(Node node)
-	{
-		if(node != null)
-		{
-			post(node.left);
-			post(node.right);
-			System.out.print(node.data+" ");
-		}
-	}
-	public static void inOrder(Tree tree)
-	{
-		order(tree.root);
-	}
-	public static void order(Node node)
-	{
-		if(node != null)
-		{
-			order(node.left);
-			System.out.print(node.data + " ");
-			order(node.right);
-		}
-	}
-	public static void preOrder(Tree tree)
-	{
-		pre(tree.root);
-	}
-	public static void pre(Node node)
-	{
-		if(node != null)
-		{
-			System.out.print(node.data+" ");
-			pre(node.left);
-			pre(node.right);
-		}
-	}
-	static class Node
+	public static class Node
 	{
 		int data;
-		Node right;
-		Node left;
-		Node parent;
-
+		Node left, right, parent;
+		
 		public Node()
 		{
 			data = 0;
-			right = null;
 			left = null;
+			right = null;
 			parent = null;
 		}
-
 		public Node(int i)
 		{
 			data = i;
-			right = null;
 			left = null;
+			right = null;
 			parent = null;
 		}
 	}
-	static class Tree
+	public static class Btree
 	{
 		Node root;
 		int nElements;
-
-		public Tree()
+		
+		public Btree()
 		{
 			root = null;
 			nElements = 0;
 		}
+		
+		public int size()
+		{
+			return nElements;
+		}
 		public void insert(int i)
 		{
-			Node newNode = new Node(i);
-			boolean placed = false;
-			nElements++;
-
 			if(root == null)
 			{
-				root = newNode;
-				placed = true;
+				root = new Node(i);
 			}
 			else
 			{
 				Node current = root;
+				boolean placed = false;
+				
 				while(!placed)
 				{
-
-				if(i < current.data)
-				{
-
-					if(current.left == null)
+					if(i < current.data)
 					{
-						current.left = newNode;
-						current.left.parent = current;
-						placed = true;
+						if(current.left == null)
+						{
+							current.left = new Node(i);
+							current.left.parent = current;
+							placed = true;
+						}
+						else
+							current = current.left;
+							
 					}
 					else
-						current = current.left;
-				}
-				else
-				{
-					if(current.right == null)
 					{
-						current.right = newNode;
-						current.right.parent = current;
-						placed = true;
+						if(current.right == null)
+						{
+							current.right = new Node(i);
+							current.right.parent = current;
+							placed = true;
+						}
+						else
+							current = current.right;
 					}
-					else
-						current = current.right;
-				}
 				}
 			}
-			if(placed)
-				System.out.println("added");
+			nElements++;
 		}
 		public boolean find(int i)
 		{
 			Node current = root;
-
+			while(current != null)
+			{
+				if(i == current.data)
+					return true;
+				else
+				{
+					if(i < current.data)
+						current = current.left;
+					if(i > current.data)
+						current = current.right;	
+				}
+					
+			}
+			return false;
+		}
+		public void delete(int i)
+		{
+			Node current = root;
 			while(current.data != i)
 			{
 				if(i < current.data)
-				{
 					current = current.left;
-				}
 				else
-					current = current.right;
-				if(current == null)
-					return false;
+					current = current.right;	
 			}
-			return true;
-		}
-		public int smallest()
-		{
-			Node current = root;
-			while(current.left != null)
+			
+			if(current.left == null && current.right == null)
 			{
-				current = current.left;
-			}
-			return current.data;
-		}
-		public int largest()
-		{
-			Node current = root;
-			while(current.right != null)
+							if(current == root)
+				root = null;
+			else
 			{
-				current = current.right;
+				current = current.parent;
+			    if(current.left.data == i && current.left!= null)
+				    current.left = null;
+			    else
+				    current.right = null;	
+			}	
 			}
-			return current.data;
+			else if(current.left != null && current.right != null)
+			{
+				Node successor = current.right;
+			
+			while(successor.left != null)
+				successor = successor.left;
+			
+			current.data = successor.data;
+			if(successor.parent != current)
+				successor.left = null;
+			else
+				delete(successor.data);	
+				
+			}
+			else
+			{
+				if(current.left != null)
+			{
+				current.data = current.left.data;
+				current.left = current.left.left;
+			}
+			else
+			{
+				current.data = current.right.data;
+				current.right = current.right.right;
+			}
+			}
+			nElements--;	
+					
 		}
 		public int root()
 		{
 			return root.data;
 		}
-		public void delete(int i)
+		public void inOrder(Node current)
+		{
+			if(current != null)
+			{
+				inOrder(current.left);
+				System.out.print(current.data+" ");
+				inOrder(current.right);
+			}
+		}
+		public void pre(Node current)
+		{
+			if(current != null)
+			{
+				System.out.print(current.data+" ");
+				pre(current.left);
+				pre(current.right);
+			}
+		}
+		public void post(Node current)
+		{
+			if(current != null)
+			{
+				post(current.left);
+				post(current.right);
+				System.out.print(current.data+" ");
+			}
+		}
+		public int smallest()
 		{
 			Node current = root;
-
-			while(current.data != i)
+			while(current.left != null)
+				current = current.left;
+			return current.data;	
+		}	
+			public int largest()
 			{
-				if(i < current.data)
-				{
-					current = current.left;
-				}
-				else
+				Node current = root;
+				while(current.right != null)
 					current = current.right;
+				return current.data;	
 			}
-
-			if(current.left == null && current.right == null)
-			{
-				current = current.parent;
-				if(current.left != null && current.left.data == i)
-					current.left = null;
-				else
-					current.right = null;
-			}
-			else if(current.left != null && current.right != null)
-			{
-				Node successor = current.right;
-
-				while(successor.left != null)
-				{
-					successor = successor.left;
-				}
-				current.data = successor.data;
-				successor = successor.parent;
-				if(successor.left.data == current.data)
-					successor.left = null;
-				else
-				{
-					current.right=successor.right;
-					current.right = null;
-				}
-
-			}
-			else
-			{
-				if(current.left != null)
-				{
-					current.data = current.left.data;
-					current.left = current.left.left;
-					if(current.left.parent != null)
-						current.left.parent = current;
-				}
-				else
-				{
-					current.data = current.right.data;
-					current.right = current.right.right;
-					if(current.right != null)
-						current.right.parent = current;
-				}
-			}
-			nElements--;
-			System.out.println("deleted and updated");
-		}
-		public int size()
-		{
-			return nElements;
-		}
-
-
-
+			
 	}
+	
 }
