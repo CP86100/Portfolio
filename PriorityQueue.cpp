@@ -96,7 +96,7 @@ void Queue::set (int size)
 
 int main()
 {
-    //These are commands to test the functionality of the priority queue.
+    //These are just commands to test the functionality of the Priority Queue.
     Queue q; q.set(5);
     q.insert(2);
     q.insert(10);
